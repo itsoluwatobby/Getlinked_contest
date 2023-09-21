@@ -1,16 +1,17 @@
-import { ChangeEvent, FormEvent } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import LoadingSpinner from "../LoadingSpinner"
 import Person1 from '/images/person1.png'
 import Person2 from '/images/person2.png'
 import Star from '/images/star.png'
 import { FieldInput } from './FieldInput'
+import { emailRegex, phoneRegex, validEntry } from '../../utils/toastStyles'
+import { BiCommentError } from 'react-icons/bi'
+import { BsCheck } from 'react-icons/bs'
 
 const initEntry = { team_name: '', phone_number: '', email: '', project_topic: '', group_size: 0, category: 1, privacy_poclicy_accepted: false }
-const fetchState = { error: '', isLoading: false }
-
+const fetchState = { error: false, isLoading: false }
 
 type FormProps = {
-  canSubmit: boolean,
   userEntry: typeof initEntry,
   appState: typeof fetchState,
   fetchCats: typeof fetchState,
@@ -21,13 +22,35 @@ type FormProps = {
   setUserEntry: React.Dispatch<React.SetStateAction<typeof initEntry>>,
 }
 
-export default function Form({ canSubmit, userEntry, appState, fetchCats, categories, handleChange, handleSubmit, setUserEntry, setGetCats }: FormProps) {
+export default function Form({ userEntry, appState, fetchCats, categories, handleChange, handleSubmit, setUserEntry, setGetCats }: FormProps) {
+  const [isValidEntry, setIsValidEntry] = useState<typeof validEntry>(validEntry)
 
   const { isLoading } = appState
+  const { isValidPhoneNumber, isValidEmail } = isValidEntry
   const { team_name, phone_number, email, project_topic, privacy_poclicy_accepted } = userEntry
 
+  const canSubmit = [...Object.values(userEntry), isValidEmail, isValidPhoneNumber].every(Boolean)
+
+  useEffect(() => {
+    let isMounted = true
+    if(isMounted && email) setIsValidEntry(prev => ({...prev, isValidEmail: emailRegex.test(email)}))
+    
+    return () => {
+      isMounted = false
+    }
+  }, [email])
+  
+  useEffect(() => {
+    let isMounted = true
+    if(isMounted && phone_number) setIsValidEntry(prev => ({...prev, isValidPhoneNumber: phoneRegex.test(phone_number)}))
+  
+    return () => {
+      isMounted = false
+    }
+  }, [phone_number])
+
   return (
-    <form onSubmit={handleSubmit} className='monstera md:bg-[#150E28] -translate-y-3 px-10 md:py-8 flex flex-col items-center gap-2 md:rounded-md md:shadow-2xl shadow-slate-950 min-w-[25rem]'>
+    <form onSubmit={handleSubmit} className='monstera md:bg-[#150E28] -translate-y-2 mobile:px-16 px-8 md:py-8 flex flex-col items-center gap-2 md:rounded-md md:shadow-2xl shadow-slate-950 min-w-[27rem] md:w-[40rem]'>
 
     <h1 className='text-[#de79f7] hidden md:block text-xl font-bold self-start pb-3'>Register</h1>
     
@@ -53,17 +76,33 @@ export default function Form({ canSubmit, userEntry, appState, fetchCats, catego
             title='Team&apos;s Name' placeholder='Enter the name of your group'
             name='team_name' value={team_name} handleChange={handleChange}
           />
-          <FieldInput 
-            title='Phone' placeholder='Enter your phone number' type='tel'
-            name='phone_number' value={phone_number} handleChange={handleChange}
-          />
+          <div className='relative w-full'>
+            <FieldInput 
+              title='Phone' placeholder='Enter your phone number' type='tel'
+              name='phone_number' value={phone_number} handleChange={handleChange}
+            />
+            <span className={`absolute rounded-md ${(phone_number?.length && !isValidPhoneNumber) ? 'scale-1' : 'scale-0'} transition-all rounded-md text-center text-[11px] text-red-500 w-full bg-[#0b0618]`}>min 10, max 13, Example: 08012345678</span>
+          </div>
         </div>
 
         <div className='flex md:flex-row flex-col w-full gap-4'>
-          <FieldInput
-            title='Email' placeholder='Enter your email address' type='email'
-            name='email' value={email} handleChange={handleChange}
-          />
+          <div className='relative w-full'>
+            <FieldInput 
+              title='Email' placeholder='Enter your email address' type='email'
+              name='email' value={email} handleChange={handleChange}
+            />
+            {
+              email ? (
+                isValidEmail ?
+                  <BsCheck className={'absolute right-0 top-8 text-green-500 text-2xl'} />
+                  :
+                  <BiCommentError 
+                    title='Not a valid email' 
+                    className={`absolute right-0.5 top-8 text-red-500 text-xl cursor-default`}
+                  />
+              ) : null
+            }
+          </div>
           <FieldInput 
             title='Project Topic' placeholder='what is your group project topic'
             name='project_topic' value={project_topic} handleChange={handleChange}
@@ -76,7 +115,7 @@ export default function Form({ canSubmit, userEntry, appState, fetchCats, catego
             <label htmlFor='cat' className='text-[12px]'>Category</label>
             <select
               id='cat'
-              className='flex-auto bg-inherit cursor-pointer placeholder:text-gray-600 rounded-[4px] p-2 focus:outline-none w-full px-2 border border-gray-400'
+              className='flex-auto bg-inherit cursor-pointer placeholder:text-gray-600 rounded-[4px] p-2.5 focus:outline-none w-full px-2 border border-gray-400'
               onClick={() => setGetCats('YES')}
               onChange={event => setUserEntry(prev => ({ ...prev, category: +event.target.value }))}
             >
@@ -98,7 +137,7 @@ export default function Form({ canSubmit, userEntry, appState, fetchCats, catego
             <label htmlFor='group' className='text-[12px]'>Group Size</label>
             <select
               id='group'
-              className='flex-none bg-inherit cursor-pointer placeholder:text-gray-600 rounded-[4px] p-2 focus:outline-none w-full px-2 border border-gray-400'
+              className='flex-none bg-inherit cursor-pointer placeholder:text-gray-600 rounded-[4px] p-2.5 focus:outline-none w-full px-2 border border-gray-400'
               onChange={event => setUserEntry(prev => ({ ...prev, group_size: +event.target.value }))}
             >
               <option value="" className='text-gray-200 text-center bg-[#150E28]'>Select</option>
@@ -131,7 +170,7 @@ export default function Form({ canSubmit, userEntry, appState, fetchCats, catego
       <button 
         type='submit'
         disabled={!canSubmit && !isLoading}
-        className={`${(!canSubmit || isLoading ) ? 'bg-gradient-to-r to-indigo-700 from-gray-500' : 'bg-gradient-to-r to-indigo-500 from-pink-500'} rounded-[5px] text-xs self-center p-3.5 px-16 w-fit md:w-full hover:opacity-90 transition-all`}>
+        className={`${(!canSubmit || isLoading) ? 'bg-gradient-to-r to-indigo-700 from-gray-500' : 'bg-gradient-to-r to-indigo-500 from-pink-500'} ${isLoading ? 'animate-pulse' : 'animate-none'} rounded-[5px] text-xs self-center p-3.5 px-16 w-fit md:w-full hover:opacity-90 transition-all`}>
           {isLoading ? 'In Progress...' : 'Submit'}
       </button>
 

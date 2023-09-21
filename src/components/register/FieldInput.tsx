@@ -13,16 +13,16 @@ export const FieldInput = ({ type='text', value, title, placeholder, name, handl
 
   return (
     <div className='flex flex-col w-full gap-0.5'>
-      <label htmlFor={name} className='text-[12px]'>{title}</label>
+      <label htmlFor={name} className='text-[12px] mobile:text-sm'>{title}</label>
       <input 
         type={type} 
         id={name}
         placeholder={placeholder}
         name={name}
-        pattern={type === 'tel' ? "[0-9]{3}-[0-9]{3}-[0-9]{4}" : '*'} 
         value={value}
+        autoComplete='off'
         onChange={handleChange}
-        className='bg-[#150E28] placeholder:text-gray-600 rounded-[4px] p-2 focus:outline-none w-full px-4 border border-gray-400'
+        className='bg-[#150E28] mobile:text-sm placeholder:text-gray-600 rounded-[5px] p-2.5 focus:outline-none w-full px-4 border border-gray-300'
       />
     </div>
   )

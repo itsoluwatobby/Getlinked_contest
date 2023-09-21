@@ -13,7 +13,7 @@ export default function Modal() {
         <TiTimes className='text-xl' />
       </button>
 
-      <Navbuttons />
+      <Navbuttons setOpenModal={setOpenModal} />
 
     </aside>
   )

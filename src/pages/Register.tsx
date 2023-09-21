@@ -14,7 +14,7 @@ type RegisterProp = {
 }
 
 const initEntry = { team_name: '', phone_number: '', email: '', project_topic: '', group_size: 0, category: 1, privacy_poclicy_accepted: false }
-const fetchState = { error: '', isLoading: false }
+const fetchState = { error: false, isLoading: false }
 export default function Register({ setOpenModal }: RegisterProp) {
   const [reveal, setReveal] = useState<boolean>(false)
   const [userEntry, setUserEntry] = useState<typeof initEntry>(initEntry)
@@ -28,7 +28,7 @@ export default function Register({ setOpenModal }: RegisterProp) {
     const value = event.target.value
     setUserEntry(prev => ({...prev, [name]: value}))
   }
-console.log(userEntry)
+
   useEffect(() => {
     let isMounted = true
     const getCategories = () => {
@@ -39,11 +39,8 @@ console.log(userEntry)
         setFetchCats(prev => ({...prev, isLoading: false}))
         setGetCats('NO')
       })
-      .catch(error => {
-        const errorMsg = error?.response?.message
-        console.log(error?.response)
-        setFetchCats(prev => ({...prev, error: errorMsg}))
-        setFetchCats(prev => ({...prev, isLoading: false}))
+      .catch(() => {
+        setFetchCats(prev => ({...prev, error: true, isLoading: false}))
         setGetCats('NO')
       })
     }
@@ -67,12 +64,10 @@ console.log(userEntry)
       setReveal(true)
       setGetCats('NO')
     }
-    catch(error: unknown){
-      const errorMsg = error?.response?.message
-      console.log(error?.response)
-      setAppState(prev => ({...prev, error: errorMsg}))
+    catch(error){
       setGetCats('NO')
-      toast.error(errorMsg, ErrorStyle)
+      setAppState(prev => ({...prev, error: true}))
+      toast.error('An error occurred', ErrorStyle)
     }
     finally{
       setAppState(prev => ({...prev, isLoading: false}))
@@ -83,12 +78,12 @@ console.log(userEntry)
   return (
     <section
       onClick={() => setOpenModal(false)}
-      className='monstera relative flex flex-col w-full md:flex-row md:justify-around py-10 p-10 items-center gap-4'
+      className='monstera relative flex flex-col w-full md:flex-row md:justify-around py-10 p-10 items-center gap-4 md:gap-2'
     >
-      <h1 className='text-[#de79f7] font-bold self-start md:hidden'>Register</h1>
+      <h1 className='text-[#de79f7] font-bold self-start md:hidden cursor-default'>Register</h1>
        <img src={Star} alt="star" className='absolute top-4 object-cover w-2.5 self-center' loading='lazy' />
 
-      <figure className='w-48 md:w-[21rem] md:h-[25rem] md:flex-none'>
+      <figure className='md:flex-none w-48 md:w-[18rem] md:h-[25rem]'>
         <img src={Designers} alt="big idea" loading='eager' className='object-cover w-full self-center h-full' />
       </figure>
       
@@ -97,7 +92,7 @@ console.log(userEntry)
       <img src={StarWhite} alt="star" loading='eager' className='absolute right-16 bottom-24 object-cover w-2 self-center' />
 
       <Form 
-        categories={categories} canSubmit={canSubmit}
+        categories={categories}
         setUserEntry={setUserEntry} setGetCats={setGetCats} 
         handleSubmit={handleSubmit} handleChange={handleChange} 
         userEntry={userEntry} appState={appState} fetchCats={fetchCats}
