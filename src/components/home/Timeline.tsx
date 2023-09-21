@@ -20,37 +20,58 @@ export default function Timeline() {
         </p>
       </div>
 
-      <div className='monstera relative flex flex-col gap-5 text-[13px] py-8'>
+      <div className='monstera relative flex flex-col md:flex-row gap-5 text-[13px] py-8'>
      
-        <TimelineCard 
-          title='Hackathon Announcement' date='November 18, 2023' count={1}
-          content='The getlinked tech hackathon 1.0 is formally announced to the general public and teams begin to get ready to register'
-        />
-       
-        <TimelineCard 
-          title='Teams Registration begins' date='November 18, 2023' count={2}
-          content='Interested teams can now show their interest in the getlinked tech hackathon 1.0 2023 by proceeding to register'
-        />
+        <div className='h-full flex flex-col gap-5'>
+
+          <TimelineCard 
+            title='Hackathon Announcement' date='November 18, 2023' count={1}
+            content='The getlinked tech hackathon 1.0 is formally announced to the general public and teams begin to get ready to register'
+          />
         
-        <TimelineCard 
-          title='Teams Registration begins' date='November 18, 2023' count={3}
-          content='Interested Participants are no longer Allowed to register'
-        />
-      
-        <TimelineCard 
-          title='Announcement of the accepted teams and ideas' date='November 18, 2023' count={4}
-          content='All teams whom idea has been accepted into getlinked tech hackathon 1.0 2023 are formally announced'
-        />
-      
-        <TimelineCard 
-          title='Getlinked Hackathon 1.0 Offically Begins' date='November 18, 2023' count={5}
-          content='Accepted teams can now proceed to build their ground breaking skill driven solutions'
-        />
-      
-        <TimelineCard 
-          title='Demo Day' date='November 18, 2023' count={6}
-          content='Teams get the opportunity to pitch their projects to judges. The winner of the hackathon will also be announced on this day'
-        />
+          <TimelineCard 
+            title='Teams Registration begins' date='November 18, 2023' count={2}
+            content='Interested teams can now show their interest in the getlinked tech hackathon 1.0 2023 by proceeding to register'
+          />
+          
+          <TimelineCard 
+            title='Teams Registration begins' date='November 18, 2023' count={3}
+            content='Interested Participants are no longer Allowed to register'
+          />
+
+        </div>
+
+        <div className='hidden md:flex flex-col items-center'>
+          {
+            [...Array(6).keys()]?.map(i => (
+              <div 
+                key={i}
+                className='hidden md:flex flex-col gap-1.5 py-0.5 items-center h-full'>
+                <div className='w-0.5 h-full bg-[#c788d7]' />
+                <p className='w-5 h-7 rounded-full bg-gradient-to-r to-indigo-500 from-[#ce2af7] grid place-content-center text-xs'>{i + 1}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div className='h-full flex flex-col gap-5'>
+
+          <TimelineCard 
+            title='Announcement of the accepted teams and ideas' date='November 18, 2023' count={4}
+            content='All teams whom idea has been accepted into getlinked tech hackathon 1.0 2023 are formally announced'
+          />
+        
+          <TimelineCard 
+            title='Getlinked Hackathon 1.0 Offically Begins' date='November 18, 2023' count={5}
+            content='Accepted teams can now proceed to build their ground breaking skill driven solutions'
+          />
+        
+          <TimelineCard 
+            title='Demo Day' date='November 18, 2023' count={6}
+            content='Teams get the opportunity to pitch their projects to judges. The winner of the hackathon will also be announced on this day'
+          />
+
+        </div>
   
       </div>
    
@@ -74,17 +95,19 @@ const TimelineCard = ({ title, date, content, count }: CardProps) => {
   return (
     <div 
       id='timeline'
-      className='flex items-center gap-2 text-xs align-top'>
+      className={`flex items-center gap-2 ${count > 3 ? 'md:translate-y-10' : ''} text-xs align-top`}>
         
-      <div className='flex flex-col gap-1 py-0.5 items-center h-full'>
-        <div className='w-0.5 h-full bg-[#ce2af7]' />
+      <div className='flex flex-col md:hidden gap-1 py-0.5 items-center h-full'>
+        <div className='w-0.5 h-full bg-[#c788d7]' />
         <p className='w-4 h-4 rounded-full bg-gradient-to-r to-indigo-500 from-[#ce2af7] grid place-content-center text-xs'>{count}</p>
       </div>
 
-      <div className='flex flex-col gap-1 whitespace-pre-wrap cursor-pointer transition-all leading-5'>
-        <p className='text-[#ce2af7]'>{title}</p>
-        <p className='text-gray-200 w-[90%] text-[11px]'>{content}</p>
-        <p className='text-[#ce2af7]'>{date}</p>
+      <div className={`flex ${count > 3 ? 'md:flex-col-reverse flex-col' : 'flex-col'} gap-1 md:gap-11 whitespace-pre-wrap cursor-pointer transition-all leading-5`}>
+        <div className='flex flex-col gap-1'>
+          <p className='text-[#ce2af7]'>{title}</p>
+          <p className='text-gray-200 w-[90%] text-[11px]'>{content}</p>
+        </div>
+        <p className={`text-[#ce2af7] ${count > 3 ? 'md:text-left text-left' : 'md:text-right text-left'} transition-all`}>{date}</p>
       </div>
     
     </div>

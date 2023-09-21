@@ -89,12 +89,12 @@ console.log(userEntry)
        <img src={Star} alt="star" className='absolute top-4 object-cover w-2.5 self-center' loading='lazy' />
 
       <figure className='w-48 md:w-[21rem] md:h-[25rem] md:flex-none'>
-        <img src={Designers} alt="big idea" loading='lazy' className='object-cover w-full self-center h-full' />
+        <img src={Designers} alt="big idea" loading='eager' className='object-cover w-full self-center h-full' />
       </figure>
       
-      <img src={StarGray} alt="star" loading='lazy' className='absolute left-62 top-52 object-cover w-2 self-center' />
+      <img src={StarGray} alt="star" loading='eager' className='absolute left-62 top-52 object-cover w-2 self-center' />
 
-      <img src={StarWhite} alt="star" loading='lazy' className='absolute right-16 bottom-24 object-cover w-2 self-center' />
+      <img src={StarWhite} alt="star" loading='eager' className='absolute right-16 bottom-24 object-cover w-2 self-center' />
 
       <Form 
         categories={categories} canSubmit={canSubmit}

@@ -62,10 +62,18 @@ export default function Contact() {
           
           <div className='flex items-center gap-3'>
             <p className='text-[#be22e6] whitespace-nowrap'>Follow us</p>
-            <AiOutlineInstagram className='text-xl cursor-pointer hover:opacity-90 hover:scale-[1.023] active:opacity-100 active:scale-[1] transition-all' />
-            <RiTwitterXFill className='text-lg cursor-pointer hover:opacity-90 hover:scale-[1.023] active:opacity-100 active:scale-[1] transition-all' />
-            <BiLogoFacebook className='text-2xl cursor-pointer hover:opacity-90 hover:scale-[1.023] active:opacity-100 active:scale-[1] transition-all' />
-            <BiLogoLinkedin className='text-2xl cursor-pointer hover:opacity-90 hover:scale-[1.023] active:opacity-100 active:scale-[1] transition-all' />
+            <a href={'https://'} target='_blank'>
+              <AiOutlineInstagram className='text-xl cursor-pointer hover:opacity-90 hover:scale-[1.023] active:opacity-100 active:scale-[1] transition-all' />
+            </a>
+            <a href={'https://twitter.com/getLinkedai'} target='_blank'>
+              <RiTwitterXFill className='text-lg cursor-pointer hover:opacity-90 hover:scale-[1.023] active:opacity-100 active:scale-[1] transition-all' />
+            </a>
+            <a href={'https://'} target='_blank'>
+              <BiLogoFacebook className='text-2xl cursor-pointer hover:opacity-90 hover:scale-[1.023] active:opacity-100 active:scale-[1] transition-all' />
+            </a>
+            <a href={'https://linkedin.com/company/getlinked-ai'} target='_blank'>
+              <BiLogoLinkedin className='text-2xl cursor-pointer hover:opacity-90 hover:scale-[1.023] active:opacity-100 active:scale-[1] transition-all' />
+            </a>
           </div>
 
         </div>
