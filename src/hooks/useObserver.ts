@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react'
+import { useCallback, useState } from 'react'
 
 type useObserverProps = {
   screenPosition: string,
@@ -13,10 +13,8 @@ type useObserverProps = {
 
 export default function useObserver({ screenPosition, threshold=0 }: useObserverProps) {
   const [isIntersecting, setIsIntersecting] = useState<IsIntersectingType>('SWITCH')
-  const observer = useRef<IntersectionObserver>(null)
   const observerRef = useCallback((node: HTMLElement) => {
-    if(observer.current) observer.current.disconnect()
-    observer.current = new IntersectionObserver(entries => { // eslint-disable-line
+    const observer = new IntersectionObserver(entries => {
       if(entries[0].isIntersecting) setIsIntersecting('SWITCH')
       else setIsIntersecting('STOP')
     },
@@ -25,7 +23,8 @@ export default function useObserver({ screenPosition, threshold=0 }: useObserver
       rootMargin: screenPosition,
     }
     )
-    if(node) observer.current.observe(node as unknown as Element)
+    if(node) observer.observe(node as unknown as Element)
+    // if(observer) observer.disconnect()
   }, [screenPosition, threshold])
 
   return {isIntersecting, observerRef}

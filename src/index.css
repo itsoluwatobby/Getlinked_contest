@@ -31,32 +31,6 @@ html{
   font-family: 'Barlow Semi Condensed', sans-serif;
 }
 
-@keyframes vibrate {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-2px);
-  }
-  50% {
-    transform: translateX(2px);
-    transform: rotate(20deg);
-    transform: rotate(-20deg);
-  }
-  75% {
-    transform: translateX(-2px);
-    transform: rotate(-20deg);
-  }
-  100% {
-    transform: translateX(2px);
-  }
-}
-
-
-.vibrating-element {
-  animation: vibrate 0.3s infinite;
-  animation-iteration-count: 10;
-}
 
 @keyframes streamColor {
   0% {
@@ -84,24 +58,5 @@ html{
 .stream-color{
   animation: streamColor 0.8s infinite;
   animation-iteration-count: 8;
-}
-
-/* Define a keyframe animation for horizontal spinning */
-@keyframes spin-horizontal {
-  0% {
-    transform: rotateY(0deg);
-  }
-  50% {
-    transform: rotateY(180deg);
-  }
-  100% {
-    transform: rotateY(0deg);
-  }
-}
-
-/* Apply the horizontal spinning animation to your element */
-.spinning-element {
-  animation: spin-horizontal 2s linear infinite;
-  /* Adjust the duration and other properties as needed */
 }
 
