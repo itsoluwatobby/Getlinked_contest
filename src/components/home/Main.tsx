@@ -25,10 +25,10 @@ export default function Main() {
   useEffect(() => {
     const opacityLength = Opacities()?.length - 1
     let randomIndex: number = 0
-    let timerId: number = 0
+    let timeoutId: NodeJS.Timeout = setTimeout(()=>{})
     let prevIndex = 0
     if(isIntersecting === 'SWITCH'){
-      timerId = setInterval(() => {
+      timeoutId = setInterval(() => {
         const rand = Math.floor(Math.random() + 2)
         randomIndex = Math.floor((opacityLength * Math.random()) + rand)
         if(randomIndex > opacityLength) randomIndex = randomIndex - opacityLength
@@ -42,10 +42,11 @@ export default function Main() {
     }
     else if(isIntersecting === 'STOP') {  
       setDynamicOpacity(Opacities()[randomIndex])
-      clearInterval(timerId)
+      clearInterval(timeoutId)
     }
+
     return () => {
-      clearInterval(timerId)
+      clearInterval(timeoutId)
     }
   }, [Opacities, isIntersecting])
 
@@ -138,7 +139,7 @@ export default function Main() {
       <figure className='relative w-screen md:w-[90%] md:pt-5'>
         <img src={Hackathonguy} alt="" loading='eager' className='w-full opacity-90 filter drop-shadow-xl'/>
         {
-          <img src={Globe} alt="" loading='eager' className={`absolute top-0 w-full ${dynamicOpacity} transition-all h-[97%] drop-shadow-xl`}/>
+          <img src={Globe} alt="" loading='eager' className={`absolute top-1 w-full ${dynamicOpacity} transition-all h-[97%] drop-shadow-xl`}/>
         }
       </figure>
 

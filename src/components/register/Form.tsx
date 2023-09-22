@@ -51,7 +51,7 @@ export default function Form({ userEntry, appState, fetchCats, categories, handl
   }, [phone_number])
   
   useEffect(() => {
-    let timeoutId: number
+    let timeoutId: NodeJS.Timeout = setTimeout(()=>{})
     if(error) {
       timeoutId = setTimeout(() => {
         setAppState(prev => ({...prev, error: false}))
