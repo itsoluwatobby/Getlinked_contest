@@ -31,7 +31,7 @@ export default function Prizes() {
       </div>
 
       <figure className={`w-80 md:w-72 md:flex-none transition-all ${isIntersecting === 'SWITCH' ? '' : ''}`}>
-        <img src={Prize} alt="prizes" loading='lazy' className='object-cover w-full self-center' />
+        <img src={Prize} alt="prizes" loading='eager' className='object-cover w-full self-center' />
       </figure>
 
 
@@ -103,7 +103,7 @@ const PrizeCard = ({ prizeAmount, image, position, isIntersecting }: CardProps) 
   return (
     <div className={`relative flex flex-col items-center mt-2 pb-4 p-2 border ${position === '1st' ? 'border-[#5a37a7] bg-[#5a37a7] bg-opacity-10 pt-10 translate-y-1' : 'pt-8 border-[#ce2af7] bg-opacity-10 bg-[#ce2af7]'} ${isIntersecting === 'SWITCH' ? 'stream-color' : ''} rounded-md gap-2 w-fit text-xs align-top`}>
       <figure className={`absolute ${position === '1st' ? 'w-24 h-24 -top-14' : 'w-14 h-14 -top-6'}`}>
-        <img src={image} alt={position} className='objec-cover w-full h-full' />
+        <img src={image} alt={position} loading='eager' className='objec-cover w-full h-full' />
       </figure>
     
       <div className='flex flex-col items-center'>

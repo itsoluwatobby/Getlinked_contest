@@ -69,7 +69,7 @@ const Logos = ({ image, option }: CardProps) => {
 
   return (
     <figure className={`${option === 'a' ? 'md:ml-3 md:mr-4 w-10 px-0.5' : option === 'b' ? 'w-10 md:ml-6' : option === 'c' ? 'w-8' : option === 'd' ? 'md:mr-' : 'w-9'}`}>
-      <img src={image} alt={image} className='objec-cover w-full h-full' />
+      <img src={image} alt={image} loading='eager' className='objec-cover w-full h-full' />
     </figure>
   )
 }

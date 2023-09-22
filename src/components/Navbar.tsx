@@ -8,8 +8,8 @@ export default function Navbar() {
   const excludeBorder = ['/contact', '/register']
 
   return (
-    <nav className={`sticky top-0 bg-gradient-to-l from-[#0e0527] from-15% to-[#150E28] z-50 w-full p-5 px-10 pt-8 ${excludeBorder?.includes(pathname) ? 'hidden md:flex' : 'flex'} items-center justify-between ${excludeBorder?.includes(pathname) ? 'border-none' : 'border border-t-0 border-r-0 border-l-0 border-b-1 border-gray-700'}`}>
-      <Link to='/' className='flex items-center font-bold text-lg'>
+    <nav className={`sticky top-0 bg-gradient-to-l from-[#0e0527] from-15% to-[#150E28] z-50 w-full p-5 px-10 md:px-14 pt-8 ${excludeBorder?.includes(pathname) ? 'hidden md:flex' : 'flex'} items-center justify-between ${excludeBorder?.includes(pathname) ? 'border-none' : 'border border-t-0 border-r-0 border-l-0 border-b-1 border-gray-700'}`}>
+      <Link to='/' className='flex items-center font-bold text-lg md:text-xl'>
         <span>get</span>
         <span className='text-[#D434FE]'>Linked</span>
       </Link>

@@ -23,8 +23,8 @@ export default function Confirmation({ reveal, setReveal, setOpenModal }: Confir
       <div className='flex flex-col self-center items-center md:w-1/2 transition-all gap-6 p-7 border rounded-md border-purple-700 shadow-xl'>
         
         <figure className='w-40 flex'>
-          <img src={Successfully_check} alt="star" loading='lazy' className='-translate-x-10 object-cover w-full' />
-          <img src={Successful_man} alt="star" loading='lazy' className='-translate-x-[130px] translate-y-2 object-cover w-full' />
+          <img src={Successfully_check} alt="successful checker" loading='eager' className='-translate-x-10 object-cover w-full' />
+          <img src={Successful_man} alt="successful icon" loading='eager' className='-translate-x-[130px] translate-y-2 object-cover w-full' />
         </figure>
 
         <div className='flex flex-col w-[70%] bg-transparent items-center text-[15px] tracking-wide'>

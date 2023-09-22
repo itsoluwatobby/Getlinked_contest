@@ -66,14 +66,14 @@ export default function FAQs() {
 
       <figure className='relative w-80 md:w-80 md:flex-none'>
         
-        <img src={FAQ} alt="FAQs" loading='lazy' className='object-cover w-full self-center' />
+        <img src={FAQ} alt="FAQs" loading='eager' className='object-cover w-full self-center' />
         
         <>
-          <img src={Question} alt="question" loading='lazy' className={`absolute right-28 top-0 ${isIntersecting === 'SWITCH' ? 'animate-bounce' : 'animate-none'} transition-all object-cover w-4 self-center`} />
+          <img src={Question} alt="question" loading='eager' className={`absolute right-28 top-0 ${isIntersecting === 'SWITCH' ? 'animate-bounce' : 'animate-none'} transition-all object-cover w-4 self-center`} />
 
-          <img src={Question} alt="question" loading='lazy' className={`absolute left-28 -top-8 object-cover w-6 self-center ${isIntersecting === 'SWITCH' ? 'animate-bounce' : 'animate-none'} transition-all`} />
+          <img src={Question} alt="question" loading='eager' className={`absolute left-28 -top-8 object-cover w-6 self-center ${isIntersecting === 'SWITCH' ? 'animate-bounce' : 'animate-none'} transition-all`} />
 
-          <img src={Question} alt="question" loading='lazy' className={`absolute left-8 top-2 object-cover w-4 ${isIntersecting === 'SWITCH' ? 'animate-bounce' : 'animate-none'} transition-all self-center`} />
+          <img src={Question} alt="question" loading='eager' className={`absolute left-8 top-2 object-cover w-4 ${isIntersecting === 'SWITCH' ? 'animate-bounce' : 'animate-none'} transition-all self-center`} />
         </>
       
       </figure>

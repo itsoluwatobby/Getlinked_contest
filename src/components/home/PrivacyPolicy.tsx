@@ -79,10 +79,10 @@ export default function PrivacyPolicy() {
 
       <figure className='relative w-80 lg:64 md:w-60 md:flex-none'>
         
-        <img src={BigLock} alt="big lock" loading='lazy' className='object-cover w-full self-center' />
+        <img src={BigLock} alt="big lock" loading='eager' className='object-cover w-full self-center' />
         
         <figure className='w-80 md:w-72 md:flex-none'>
-          <img src={PersonLock} alt="big lock" loading='lazy' className='absolute top-20 object-cover w-full self-center' />
+          <img src={PersonLock} alt="big lock" loading='eager' className='absolute top-20 object-cover w-full self-center' />
         </figure>
 
         <img src={Star} alt="star" className='absolute bottom-52 -left-14 object-cover w-4' loading='lazy' />

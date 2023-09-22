@@ -73,8 +73,8 @@ export default function Form({ userEntry, appState, fetchCats, categories, handl
 
         <div className='w-20 pr-4 grid place-content-center -translate-y-2 border border-dotted border-t-0 border-l-0 border-r-0 border-purple-700'>
           <figure className='flex items-center w-6'>
-            <img src={Person1} alt="big idea" loading='lazy' className='object-cover w-full self-center' />
-            <img src={Person2} alt="big idea" loading='lazy' className='object-cover w-full self-center' />
+            <img src={Person1} alt="Person icon" loading='lazy' className='object-cover w-full self-center' />
+            <img src={Person2} alt="Person icon" loading='lazy' className='object-cover w-full self-center' />
           </figure>
         </div>
       </div>

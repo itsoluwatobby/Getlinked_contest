@@ -19,7 +19,7 @@ export default function Criteria() {
        <img src={Star} alt="star" className='absolute top-4 object-cover w-2.5 self-center' loading='lazy' />
 
       <figure className='w-80 md:w-72 md:flex-none'>
-        <img src={Criterias} alt="big idea" loading='lazy' className='object-cover w-full self-center' />
+        <img src={Criterias} alt="big idea" loading='eager' className='object-cover w-full self-center' />
       </figure>
       
       <img src={StarGray} alt="star" loading='lazy' className='absolute left-62 top-52 object-cover w-2 self-center' />
@@ -34,7 +34,7 @@ export default function Criteria() {
           <h3 className='font-bold tracking-wide'>Judging Criteria</h3>
           <h3 className='text-[#D434FE] tracking-wide'>Key attributes</h3>
           
-          <img src={Star} alt="big idea" className='absolute right-10 top-14 object-cover w-2 self-center' loading='lazy' />
+          <img src={Star} alt="star" className='absolute right-10 top-14 object-cover w-2 self-center' loading='lazy' />
         </div>
 
         <p 

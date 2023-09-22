@@ -12,12 +12,12 @@ export default function Guidelines() {
       className='relative flex flex-col md:pr-20 md:flex-row-reverse p-2 pb-12 items-center gap-4 border border-t-0 border-r-0 border-l-0 border-b-1 border-gray-700'
     >
       <figure className={`${isIntersecting === 'SWITCH' ? 'scale-[1]' : 'scale-0'} transition-all w-80 md:w-72 md:flex-none`}>
-        <img src={Guideline} alt="big idea" loading='lazy' className='object-cover w-full self-center' />
+        <img src={Guideline} alt="Guideline" loading='eager' className='object-cover w-full self-center' />
       </figure>
       
-      <img src={StarWhite} alt="big idea" loading='lazy' className='absolute left-20 top-52 object-cover w-2 self-center' />
+      <img src={StarWhite} alt="star" loading='lazy' className='absolute left-20 top-52 object-cover w-2 self-center' />
 
-      <img src={StarWhite} alt="big idea" loading='lazy' className='absolute left-36 bottom-6 object-cover w-2 self-center' />
+      <img src={StarWhite} alt="star" loading='lazy' className='absolute left-36 bottom-6 object-cover w-2 self-center' />
       
       
       <div className='flex flex-col gap-4'>
@@ -27,7 +27,7 @@ export default function Guidelines() {
           <h3 className='font-bold tracking-wide'>Rules and</h3>
           <h3 className='text-[#D434FE] tracking-wide'>Guidelines</h3>
           
-          <img src={StarGray} alt="big idea" loading='lazy' className='absolute right-10 top-14 object-cover w-2 self-center' />
+          <img src={StarGray} alt="star" loading='lazy' className='absolute right-10 top-14 object-cover w-2 self-center' />
         </div>
 
         <div className='monstera flex flex-col px-12 maxmobile:px-6'>

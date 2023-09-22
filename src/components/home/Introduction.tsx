@@ -13,7 +13,7 @@ export default function Introduction() {
     >
       <figure 
         className='relative w-80 md:w-72 md:flex-none self-center'>
-        <img src={BigIdea} alt="big idea" loading='lazy' className='object-cover w-full self-center' />
+        <img src={BigIdea} alt="big idea" loading='eager' className='object-cover w-full self-center' />
         <p className={`monstera ${(isIntersecting === 'STOP') ? 'scale-[6] maxscreen:text-fuchsia-700 maxscreen:shadow-xl' : 'scale-[1]'} duration-300 absolute flex flex-col text-sm md:top-[40%] top-1/2 right-[42%] md:right-[40%] text-center z-20 font-bold`}>
           <span>The Big</span>
           <span>Idea!</span>
@@ -21,9 +21,9 @@ export default function Introduction() {
         
       </figure>
       
-      <img src={Arrow} alt="big idea" loading='lazy' className='md:absolute object-cover w-6 self-center md:bottom-10 md:left-[22rem]' />
+      <img src={Arrow} alt="arrow" loading='eager' className='md:absolute object-cover w-6 self-center md:bottom-10 md:left-[22rem]' />
       
-      <img src={Star} alt="big idea" loading='lazy' className='absolute left-24 top-32 object-cover w-2 self-center' />
+      <img src={Star} alt="star" loading='lazy' className='absolute left-24 top-32 object-cover w-2 self-center' />
       
       <div className='flex flex-col gap-4'>
 
@@ -32,7 +32,7 @@ export default function Introduction() {
           <h3 className='font-bold'>Introduction to getlinked</h3>
           <h3 className='text-[#D434FE]'>tech Hackathon 1.0</h3>
           
-          <img src={Star} alt="big idea" loading='lazy' className='absolute right-3 top-4 object-cover w-2 self-center' />
+          <img src={Star} alt="star" loading='lazy' className='absolute right-3 top-4 object-cover w-2 self-center' />
         </div>
 
         <div className='flex flex-col px-10 mobile:px-4'>

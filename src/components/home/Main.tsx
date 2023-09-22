@@ -139,7 +139,7 @@ export default function Main() {
       <figure className='relative w-screen md:w-[90%] md:pt-5'>
         <img src={Hackathonguy} alt="" loading='eager' className='w-full opacity-90 filter drop-shadow-xl'/>
         {
-          <img src={Globe} alt="" loading='eager' className={`absolute top-1 w-full ${dynamicOpacity} transition-all h-[97%] drop-shadow-xl`}/>
+          <img src={Globe} alt="HackathonGuy" loading='eager' className={`absolute top-1 w-full ${dynamicOpacity} transition-all h-[97%] drop-shadow-xl`}/>
         }
       </figure>
 
