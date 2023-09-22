@@ -58,8 +58,7 @@ export default function Register({ setOpenModal }: RegisterProp) {
     if(!canSubmit) return
     setAppState(prev => ({...prev, isLoading: true}))
     try{
-      const res = await axiosFetch.post('/hackathon/registration', userEntry)
-      console.log(res?.data)
+      await axiosFetch.post('/hackathon/registration', userEntry)
       setUserEntry(initEntry)
       setReveal(true)
       setGetCats('NO')
@@ -92,7 +91,7 @@ export default function Register({ setOpenModal }: RegisterProp) {
       <img src={StarWhite} alt="star" loading='eager' className='absolute right-16 bottom-24 object-cover w-2 self-center' />
 
       <Form 
-        categories={categories}
+        categories={categories} setAppState={setAppState}
         setUserEntry={setUserEntry} setGetCats={setGetCats} 
         handleSubmit={handleSubmit} handleChange={handleChange} 
         userEntry={userEntry} appState={appState} fetchCats={fetchCats}

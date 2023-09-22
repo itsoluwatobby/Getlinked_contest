@@ -20,12 +20,13 @@ type FormProps = {
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void,
   setGetCats: React.Dispatch<React.SetStateAction<"YES" | "NO">>,
   setUserEntry: React.Dispatch<React.SetStateAction<typeof initEntry>>,
+  setAppState: React.Dispatch<React.SetStateAction<typeof fetchState>>,
 }
 
-export default function Form({ userEntry, appState, fetchCats, categories, handleChange, handleSubmit, setUserEntry, setGetCats }: FormProps) {
+export default function Form({ userEntry, appState, fetchCats, categories, handleChange, handleSubmit, setUserEntry, setGetCats, setAppState }: FormProps) {
   const [isValidEntry, setIsValidEntry] = useState<typeof validEntry>(validEntry)
 
-  const { isLoading } = appState
+  const { isLoading, error } = appState
   const { isValidPhoneNumber, isValidEmail } = isValidEntry
   const { team_name, phone_number, email, project_topic, privacy_poclicy_accepted } = userEntry
 
@@ -48,6 +49,19 @@ export default function Form({ userEntry, appState, fetchCats, categories, handl
       isMounted = false
     }
   }, [phone_number])
+  
+  useEffect(() => {
+    let timeoutId: number
+    if(error) {
+      timeoutId = setTimeout(() => {
+        setAppState(prev => ({...prev, error: false}))
+        setGetCats('NO')
+      }, 6000);
+    }
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [error, setAppState, setGetCats])
 
   return (
     <form onSubmit={handleSubmit} className='monstera md:bg-[#150E28] -translate-y-2 mobile:px-16 px-8 md:py-8 flex flex-col items-center gap-2 md:rounded-md md:shadow-2xl shadow-slate-950 min-w-[27rem] md:w-[40rem]'>
@@ -115,11 +129,14 @@ export default function Form({ userEntry, appState, fetchCats, categories, handl
             <label htmlFor='cat' className='text-[12px]'>Category</label>
             <select
               id='cat'
-              className='flex-auto bg-inherit cursor-pointer placeholder:text-gray-600 rounded-[4px] p-2.5 focus:outline-none w-full px-2 border border-gray-400'
-              onClick={() => setGetCats('YES')}
+              className={`flex-auto bg-inherit cursor-pointer transition-all ${error ? 'text-red-500' : 'text-gray-200'} rounded-[4px] p-2.5 focus:outline-none w-full px-2 border border-gray-400`}
+              onClick={() => {
+                setGetCats('YES')
+                setAppState(prev => ({...prev, error: false}))
+              }}
               onChange={event => setUserEntry(prev => ({ ...prev, category: +event.target.value }))}
             >
-              <option value="" className='text-gray-200 text-center bg-[#150E28]'>Select your category</option>
+              <option value="" className={`text-gray-200 text-center bg-[#150E28]`}>{error ? 'Failed:::Please Refresh' : 'Select your category'}</option>
               {
                 categories?.map(cat => (
                   <option 

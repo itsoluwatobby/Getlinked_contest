@@ -38,7 +38,7 @@ export default function Main() {
         }
         setDynamicOpacity(Opacities()[randomIndex])
         prevIndex = randomIndex // set this last
-      }, 4000)
+      }, 3000)
     }
     else if(isIntersecting === 'STOP') {  
       setDynamicOpacity(Opacities()[randomIndex])
