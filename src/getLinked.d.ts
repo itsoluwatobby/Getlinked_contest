@@ -7,11 +7,10 @@ type GetLinkedContextType = {
 
 type IsIntersectingType = 'SWITCH' | 'STOP'
 
-type ErrorType = {
-  error: {
-    response: {
-      message: string,
-      status: number
-    }
+type ErrorResponseType = {
+  message: string,
+  response: {
+    data: {[index: string]: string},
+    status: number
   }
 }

@@ -4,10 +4,11 @@ import Star from '/images/star.png'
 import StarGray from '/images/starGray.png'
 import StarWhite from '/images/starWhite.png'
 import { axiosFetch } from '../api/baseUrl'
-import toast from 'react-hot-toast/headless'
+import { toast } from 'react-hot-toast'
 import { ErrorStyle } from '../utils/toastStyles'
 import Confirmation from '../components/Confirmation'
 import Form from '../components/register/Form'
+import { useNavigate } from 'react-router-dom'
 
 type RegisterProp = {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -22,6 +23,7 @@ export default function Register({ setOpenModal }: RegisterProp) {
   const [appState, setAppState] = useState<typeof fetchState>(fetchState)
   const [fetchCats, setFetchCats] = useState<typeof fetchState>(fetchState)
   const [getCats, setGetCats] = useState<'YES' | 'NO'>('NO')
+  const navigate = useNavigate()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name
@@ -63,10 +65,15 @@ export default function Register({ setOpenModal }: RegisterProp) {
       setReveal(true)
       setGetCats('NO')
     }
-    catch(error){
+    catch(error: unknown){
+      let errorMsg: string = ''
+      const errors = error as ErrorResponseType
+      const errorObj = errors?.response?.data
+      if(errorObj && 'email' in errorObj) errorMsg = errorObj?.email[0]
+      else errorMsg = errors?.message
+      toast.error(errorMsg, ErrorStyle)
       setGetCats('NO')
       setAppState(prev => ({...prev, error: true}))
-      toast.error('An error occurred', ErrorStyle)
     }
     finally{
       setAppState(prev => ({...prev, isLoading: false}))
@@ -79,7 +86,9 @@ export default function Register({ setOpenModal }: RegisterProp) {
       onClick={() => setOpenModal(false)}
       className='monstera relative flex flex-col w-full md:flex-row md:justify-around py-10 p-10 items-center gap-4 md:gap-2'
     >
-      <h1 className='text-[#de79f7] font-bold self-start md:hidden cursor-default'>Register</h1>
+      <h1 
+        onClick={() => navigate(-1)}
+        className='text-[#de79f7] font-bold self-start md:hidden cursor-default'>Register</h1>
        <img src={Star} alt="star" className='absolute top-4 object-cover w-2.5 self-center' loading='lazy' />
 
       <figure className='md:flex-none w-48 md:w-[18rem] md:h-[25rem]'>
@@ -91,10 +100,10 @@ export default function Register({ setOpenModal }: RegisterProp) {
       <img src={StarWhite} alt="star" loading='eager' className='absolute right-16 bottom-24 object-cover w-2 self-center' />
 
       <Form 
-        categories={categories} setAppState={setAppState}
         setUserEntry={setUserEntry} setGetCats={setGetCats} 
         handleSubmit={handleSubmit} handleChange={handleChange} 
         userEntry={userEntry} appState={appState} fetchCats={fetchCats}
+        categories={categories} setAppState={setAppState} setFetchCats={setFetchCats}
       />
 
       <Confirmation 
