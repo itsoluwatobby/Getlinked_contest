@@ -66,8 +66,10 @@ export default function ContactPage({ setOpenModal }: ContactPageProp) {
       setContactEntry(initContactEntry)
     }
     catch(error: unknown){
+      const errors = error as ErrorResponseType
+      const errorMsg = errors?.message ?? 'An error occurred'
       setAppState(prev => ({...prev, error: true}))
-      toast.error('An error occurred', ErrorStyle)
+      toast.error(errorMsg, ErrorStyle)
     }
     finally{
       setAppState(prev => ({...prev, isLoading: false}))
