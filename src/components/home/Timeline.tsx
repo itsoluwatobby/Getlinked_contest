@@ -4,15 +4,15 @@ import StarGray from '/images/starGray.png'
 import StarWhite from '/images/starWhite.png'
 
 export default function Timeline() {
-  // first 3 for small screens below 768px
+  // first 3 observers for small screens below 768px
   const { isIntersecting: isIntersecting0, observerRef: observerRef0 } = useObserver({screenPosition: '0px', threshold: 1})
   const { isIntersecting: isIntersecting1, observerRef: observerRef1 } = useObserver({screenPosition: '0px', threshold: 1})
   const { isIntersecting: isIntersecting2, observerRef: observerRef2 } = useObserver({screenPosition: '0px', threshold: 1})
-  // last 3 for both small screens and large screens
+  // last 3 observers for both small screens and large screens
   const { isIntersecting: isIntersecting3, observerRef: observerRef3 } = useObserver({screenPosition: '0px', threshold: 1})
   const { isIntersecting: isIntersecting4, observerRef: observerRef4 } = useObserver({screenPosition: '0px', threshold: 1})
   const { isIntersecting: isIntersecting5, observerRef: observerRef5 } = useObserver({screenPosition: '0px', threshold: 1})
-  // first 3 for large screens above 767px
+  // first 3 observers for large screens above 767px
   const { isIntersecting: isIntersecting6, observerRef: observerRef6 } = useObserver({screenPosition: '0px', threshold: 0.9})
   const { isIntersecting: isIntersecting7, observerRef: observerRef7 } = useObserver({screenPosition: '0px', threshold: 0.9})
   const { isIntersecting: isIntersecting8, observerRef: observerRef8 } = useObserver({screenPosition: '0px', threshold: 0.9})
