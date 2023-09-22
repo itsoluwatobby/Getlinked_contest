@@ -3,12 +3,15 @@ import FAQ from '/images/faqs.png'
 import Question from '/images/question.png'
 import StarGray from '/images/starGray.png'
 import StarWhite from '/images/starWhite.png'
+import useObserver from '../../hooks/useObserver'
 
 export default function FAQs() {
+  const { isIntersecting, observerRef } = useObserver({screenPosition: '0px', threshold: 0.35})
 
   return (
     <section
       id='faqs'
+      ref={observerRef}
       className='relative flex flex-col md:flex-row py-14 items-center md:justify-center gap-10 border border-t-0 border-r-0 border-l-0 border-b-1 border-gray-700'
     >
       <img src={Star} alt="star" className='absolute top-10 left-16 object-cover w-4 self-center' loading='lazy' />
@@ -16,11 +19,11 @@ export default function FAQs() {
       <img src={StarWhite} alt="star" loading='lazy' className='absolute right-32 bottom-16 object-cover w-3 self-center' />
       
       
-      <div className='monstera relative flex flex-col px-14 gap-10 text-[13px] py-8'>
+      <div className='monstera relative flex flex-col px-14 maxmobile:px-12 gap-10 text-[13px] py-8'>
         <div className='monstera relative flex flex-col font-extrabold items-center' >
           
-          <h3 className='font-bold tracking-wide'>Frequently Ask</h3>
-          <h3 className='text-[#D434FE] tracking-wide'>Question</h3>
+          <h3 className='font-bold tracking-wide'>Frequently Asked</h3>
+          <h3 className='text-[#D434FE] tracking-wide'>Questions</h3>
           
           <p className='text-[13px] text-center leading-loose font-normal'>
           We got answers to the questions that you might want to ask about getlinked Hackathon 1.0
@@ -68,7 +71,7 @@ export default function FAQs() {
         <>
           <img src={Question} alt="question" loading='lazy' className='absolute right-28 top-0 object-cover w-4 self-center' />
 
-          <img src={Question} alt="question" loading='lazy' className='absolute left-28 -top-8 object-cover w-6 self-center' />
+          <img src={Question} alt="question" loading='lazy' className={`absolute left-28 -top-8 object-cover w-6 self-center ${isIntersecting === 'SWITCH' ? 'animate-bounce' : 'animate-none'} transition-all`} />
 
           <img src={Question} alt="question" loading='lazy' className='absolute left-8 top-2 object-cover w-4 self-center' />
         </>

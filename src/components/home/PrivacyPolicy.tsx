@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           </p>
         </div>
 
-        <div className='monstera relative flex flex-col gap-5 py-12 px-6 md:px-12 border rounded-md w-[350px] md:w-[400px] md:text-justify md:indent-0 text-[12px] leading-loose indent-3 border-[#be22e6]'>
+        <div className='monstera relative flex flex-col gap-5 py-12 px-6 md:px-12 border rounded-md w-[350px] mobile:w-[320px] md:w-[400px] md:text-justify md:indent-0 text-[13px] leading-loose indent-3 border-[#be22e6]'>
 
           <p className='text-center md:text-justify'>
             At getlinked tech Hackathon 1.0, we value your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you participate in our tech hackathon event. By participating in our event, you consent to the practices described in this policy.

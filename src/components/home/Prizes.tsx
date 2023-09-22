@@ -5,8 +5,12 @@ import Prize from '/images/prizes.png'
 import Gold_medal from '/images/gold_medal.png'
 import Silver_medal from '/images/silver_medal.png'
 import Bronze_medal from '/images/bronze_medal.png'
+import useObserver from '../../hooks/useObserver'
 
 export default function Prizes() {
+  const { isIntersecting, observerRef } = useObserver({screenPosition: '0px', threshold: 0.6})
+
+  console.log(isIntersecting)
 
   return (
     <section

@@ -1,16 +1,80 @@
-import { BsStars } from 'react-icons/bs'
+import Bulb from '/images/bulb.png'
 import Spark from '/images/spark.png'
 import Chain from '/images/chain.png'
 import Curve from '/images/curve.png'
-import Bulb from '/images/bulb.png'
+import { Link } from 'react-router-dom'
+import { BsStars } from 'react-icons/bs'
+import { useState, useEffect, useCallback } from 'react'
 import Globe from '/images/hackathonGlobe.png'
 import Hackathonguy from '/images/man-wear.png'
-import { Link } from 'react-router-dom'
+import useObserver from '../../hooks/useObserver'
 
+const initDate = { hour: '00', minutes: '00', seconds: '00' }
 export default function Main() {
+  const [dynamicOpacity, setDynamicOpacity] = useState<string>('opacity-90')
+  const [time, setTime] = useState<number>(7200)
+  const [countDownTime, setCountDownTime] = useState<typeof initDate>(initDate)
+  const { isIntersecting, observerRef } = useObserver({screenPosition: '0px'})
+
+  const Opacities = useCallback(() => {
+    return ['opacity-90', 'opacity-50', 'opacity-80', 'opacity-30']
+  }, [])
+
+  const { hour, minutes, seconds } = countDownTime
+
+  useEffect(() => {
+    const opacityLength = Opacities()?.length - 1
+    let randomIndex: number = 0
+    let timerId: number = 0
+    let prevIndex = 0
+    if(isIntersecting === 'SWITCH'){
+      timerId = setInterval(() => {
+        const rand = Math.floor(Math.random() + 2)
+        randomIndex = Math.floor((opacityLength * Math.random()) + rand)
+        if(randomIndex > opacityLength) randomIndex = randomIndex - opacityLength
+        if(prevIndex === randomIndex) {
+          if(prevIndex === opacityLength) randomIndex = randomIndex - 1
+          else randomIndex = randomIndex + 1
+        }
+        setDynamicOpacity(Opacities()[randomIndex])
+        prevIndex = randomIndex // set this last
+      }, 4000)
+    }
+    else if(isIntersecting === 'STOP') {  
+      setDynamicOpacity(Opacities()[randomIndex])
+      clearInterval(timerId)
+    }
+    return () => {
+      clearInterval(timerId)
+    }
+  }, [Opacities, isIntersecting])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(prev => prev - 1)
+    }, 1000)
+    
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+  
+  useEffect(() => {
+    let isMounted = true
+    if(isMounted){
+      const hour = (Math.floor(time / 3600)).toString()
+      const minutes = (Math.floor((time % 3600) / 60)).toString()
+      const seconds = (Math.floor(time % 60)).toString()
+      setCountDownTime(prev => ({ ...prev, hour, minutes, seconds }))
+    }
+    return () => {
+      isMounted = false
+    }
+  }, [time])
 
   return (
     <section 
+      ref={observerRef}
       className="relative flex flex-col md:flex-row midscreen:items-center w-full font-sans py-4">
 
       <div className="flex flex-col items-center w-full gap-6 p-8 py-4">
@@ -54,17 +118,17 @@ export default function Main() {
           Register
         </Link>
 
-        <div className="barlow flex items-center text-4xl gap-7">
+        <div className="barlow flex items-center text-4xl gap-7 w-40">
           <p className="relative flex items-center">
-            <span>00</span>
+            <span>{hour.padStart(2, '0')}</span>
             <span className="absolute -right-2 bottom-0.5 text-xs">H</span>
           </p>
           <p className="relative flex items-center">
-            <span>00</span>
+            <span>{minutes.padStart(2, '0')}</span>
             <span className="absolute -right-2 bottom-0.5 text-xs">M</span>
           </p>
           <p className="relative flex items-center">
-            <span>00</span>
+            <span>{seconds.padStart(2, '0')}</span>
             <span className="absolute -right-2 bottom-0.5 text-xs">S</span>
           </p>
         </div>
@@ -73,7 +137,9 @@ export default function Main() {
 
       <figure className='relative w-screen md:w-[90%] md:pt-5'>
         <img src={Hackathonguy} alt="" loading='eager' className='w-full opacity-90 filter drop-shadow-xl'/>
-        <img src={Globe} alt="" loading='eager' className='absolute top-0 w-full opacity-90 h-[97%] drop-shadow-xl'/>
+        {
+          <img src={Globe} alt="" loading='eager' className={`absolute top-0 w-full ${dynamicOpacity} transition-all h-[97%] drop-shadow-xl`}/>
+        }
       </figure>
 
     </section>

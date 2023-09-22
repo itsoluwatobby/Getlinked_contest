@@ -5,11 +5,13 @@ type GetLinkedContextType = {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+type IsIntersectingType = 'SWITCH' | 'STOP'
+
 type ErrorType = {
-  // error: {
+  error: {
     response: {
       message: string,
       status: number
     }
-  // }
+  }
 }

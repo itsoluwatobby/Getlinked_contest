@@ -13,7 +13,7 @@ export default function Contact() {
   return (
     <section
       id='contact'
-      className='relative flex flex-col px-20 lg:px-28 md:justify-center py-14 md:py-5 items-center gap-12 md:gap-6'
+      className='relative flex flex-col px-20 maxmobile:px-14 lg:px-28 md:justify-center py-14 md:py-5 items-center gap-12 md:gap-6'
     >
       <img src={StarGray} alt="star" className='absolute top-10 right-32 object-cover w-2 self-center' loading='lazy' />
 

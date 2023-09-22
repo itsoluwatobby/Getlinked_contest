@@ -1,14 +1,17 @@
+import useObserver from '../../hooks/useObserver'
 import Guideline from '/images/guideline.png'
 import StarGray from '/images/starGray.png'
 import StarWhite from '/images/starWhite.png'
 
 export default function Guidelines() {
+  const { isIntersecting, observerRef } = useObserver({screenPosition: '0px', threshold: 0.3})
 
   return (
     <section
+      ref={observerRef}
       className='relative flex flex-col md:pr-20 md:flex-row-reverse p-2 pb-12 items-center gap-4 border border-t-0 border-r-0 border-l-0 border-b-1 border-gray-700'
     >
-      <figure className='w-80 md:w-72 md:flex-none'>
+      <figure className={`${isIntersecting === 'SWITCH' ? 'scale-[1]' : 'scale-0'} transition-all w-80 md:w-72 md:flex-none`}>
         <img src={Guideline} alt="big idea" loading='lazy' className='object-cover w-full self-center' />
       </figure>
       
@@ -27,7 +30,7 @@ export default function Guidelines() {
           <img src={StarGray} alt="big idea" loading='lazy' className='absolute right-10 top-14 object-cover w-2 self-center' />
         </div>
 
-        <div className='monstera flex flex-col px-12'>
+        <div className='monstera flex flex-col px-12 maxmobile:px-6'>
           <p className='px-4 whitespace-pre-wrap indent-7 md:indent-0 md:text-justify text-xs leading-loose'>
             Our tech hackathon is a melting pot of 
             visionaries, and its purpose is as clear as day:
