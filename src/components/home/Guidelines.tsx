@@ -4,7 +4,7 @@ import StarGray from '/images/starGray.png'
 import StarWhite from '/images/starWhite.png'
 
 export default function Guidelines() {
-  const { isIntersecting, observerRef } = useObserver({screenPosition: '0px', threshold: 0.3})
+  const { isIntersecting, observerRef } = useObserver({screenPosition: '0px', threshold: 0.4})
 
   return (
     <section

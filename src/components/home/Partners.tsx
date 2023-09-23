@@ -27,7 +27,7 @@ export default function PartnersAndSponsors() {
         </p>
       </div>
 
-      <div className='monstera relative flex flex-col py-4 border rounded-md w-[333px] md:w-[45%] md:h-[180px] h-[148px] border-[#be22e6]'>
+      <div className='monstera relative flex flex-col py-4 border rounded-md w-[333px] md:w-96 md:h-[180px] h-[148px] border-[#be22e6]'>
 
         <div className='flex items-center justify-between w-full h-1/2 px-12'>
           <Logos image={LibertyCompanyColour} option='a' />
@@ -68,7 +68,7 @@ type CardProps = {
 const Logos = ({ image, option }: CardProps) => {
 
   return (
-    <figure className={`${option === 'a' ? 'md:ml-3 md:mr-4 w-10 px-0.5' : option === 'b' ? 'w-10 md:ml-6' : option === 'c' ? 'w-5' : option === 'd' ? '-translate-x-4' : 'w-9'}`}>
+    <figure className={`${option === 'a' ? 'md:ml-3 md:mr-5 px-0.5 midscreen:ml-3 maxscreen:ml-4' : option === 'b' ? 'md:ml-7 maxscreen:ml-4 midscreen:ml-4' : option === 'c' ? ' ' : option === 'd' ? 'md:mr-6 maxscreen:mr-3 midscreen:mr-3' : ''}`}>
       <img src={image} alt={image} loading='eager' className='objec-cover w-full h-full' />
     </figure>
   )
