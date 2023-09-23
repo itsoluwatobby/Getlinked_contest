@@ -17,7 +17,7 @@ export default function Main() {
   const { isIntersecting, observerRef } = useObserver({screenPosition: '0px'})
 
   const Opacities = useCallback(() => {
-    return ['opacity-90', 'opacity-50', 'opacity-80', 'opacity-30']
+    return ['opacity-90', 'opacity-50', 'opacity-95', 'opacity-30', 'opacity-100', 'opacity-60']
   }, [])
 
   const { hour, minutes, seconds } = countDownTime
@@ -38,7 +38,7 @@ export default function Main() {
         }
         setDynamicOpacity(Opacities()[randomIndex])
         prevIndex = randomIndex // set this last
-      }, 3000)
+      }, 2000)
     }
     else if(isIntersecting === 'STOP') {  
       setDynamicOpacity(Opacities()[randomIndex])
