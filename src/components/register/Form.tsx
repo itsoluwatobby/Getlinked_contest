@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useCallback, useState } from 'react'
 import LoadingSpinner from "../LoadingSpinner"
 import Person1 from '/images/person1.png'
 import Person2 from '/images/person2.png'
@@ -24,8 +24,14 @@ type FormProps = {
   setFetchCats: React.Dispatch<React.SetStateAction<typeof fetchState>>,
 }
 
+const initMovement = { move1: '', move2: '' }
 export default function Form({ userEntry, appState, fetchCats, categories, handleChange, handleSubmit, setUserEntry, setGetCats, setAppState, setFetchCats }: FormProps) {
   const [isValidEntry, setIsValidEntry] = useState<typeof validEntry>(validEntry)
+  const [movement, setMovement] = useState<typeof initMovement>(initMovement)
+
+  const Movements = useCallback(() => {
+    return ['-translate-x-2', '-translate-x-1', 'translate-x-1', 'translate-x-2']
+  }, [])
 
   const { isLoading, error } = appState
   const { isValidPhoneNumber, isValidEmail } = isValidEntry
@@ -50,7 +56,44 @@ export default function Form({ userEntry, appState, fetchCats, categories, handl
       isMounted = false
     }
   }, [phone_number])
-  
+
+  useEffect(() => {
+    const movementLength = Movements()?.length - 1
+    let index1 = 0, index2 = 0;
+    let timeoutId: NodeJS.Timeout = setTimeout(()=>{})
+    let prevIndex1 = 0, prevIndex2 = 0;
+    if(appState?.isLoading){
+      timeoutId = setInterval(() => {
+        const rand = Math.floor(Math.random() + 2)
+        index1 = Math.floor((movementLength * Math.random()) + rand)
+        index2 = Math.floor((movementLength * Math.random()) + rand)
+        if(index1 > movementLength) index1 = index1 - movementLength
+        if(index2 > movementLength) index2 = index2 - movementLength
+        if(prevIndex1 === index1) {
+          if(prevIndex1 === movementLength) index1 = index1 - 1
+          else index1 = index1 + 1
+        }
+        if(prevIndex2 === index2) {
+          if(prevIndex2 === movementLength) index2 = index2 - 1
+          else index2 = index2 + 1
+        }
+        if(index1 === index2) {
+          if(index1 === movementLength) index1 = index1 - 1
+          if(index1 > 0) index1 = index1 - 1
+          else index1 = index1 + 1
+        }
+        setMovement(prev => ({ ...prev, move1: Movements()[index1], move2: Movements()[index2] }))
+        prevIndex1 = index1 // set this last
+        prevIndex2 = index2 // set this last
+      }, 3000)
+    }
+    else clearInterval(timeoutId)
+
+    return () => {
+      clearInterval(timeoutId)
+    }
+  }, [Movements, appState?.isLoading])
+
   useEffect(() => {
     let timeoutId: NodeJS.Timeout = setTimeout(()=>{})
     if(error) {
@@ -79,8 +122,8 @@ export default function Form({ userEntry, appState, fetchCats, categories, handl
 
         <div className='w-20 pr-4 grid place-content-center -translate-y-2 border border-dotted border-t-0 border-l-0 border-r-0 border-purple-700'>
           <figure className='flex items-center w-6'>
-            <img src={Person1} alt="Person icon" loading='lazy' className='object-cover w-full self-center' />
-            <img src={Person2} alt="Person icon" loading='lazy' className='object-cover w-full self-center' />
+            <img src={Person1} alt="Person icon" loading='lazy' className={`object-cover w-full self-center ${appState?.isLoading ? movement?.move1 : ''} transition-all`} />
+            <img src={Person2} alt="Person icon" loading='lazy' className={`object-cover w-full self-center ${appState?.isLoading ? movement?.move2 : ''} transition-all`} />
           </figure>
         </div>
       </div>

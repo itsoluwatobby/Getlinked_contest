@@ -31,7 +31,6 @@ html{
   font-family: 'Barlow Semi Condensed', sans-serif;
 }
 
-
 @keyframes streamColor {
   0% {
     background-color: rgba(144, 75, 198, 0.5);
@@ -57,6 +56,6 @@ html{
 
 .stream-color{
   animation: streamColor 0.8s infinite;
-  animation-iteration-count: 8;
+  animation-iteration-count: 5;
 }
 

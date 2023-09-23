@@ -76,12 +76,12 @@ export default function Main() {
   return (
     <section 
       ref={observerRef}
-      className="relative flex flex-col md:flex-row midscreen:items-center w-full font-sans py-4">
+      className="relative flex flex-col md:flex-row items-center w-full font-sans py-4">
 
-      <div className="flex flex-col items-center w-full gap-6 p-8 py-4">
+      <div className="flex flex-col items-center w-full gap-6 py-4 md:pl-5 lg:pl-36 transition-all">
 
-        <div className='flex flex-col gap-1.5 w-fit midscreen:items-center md:absolute md:right-10 md:top-0'>
-          <h2 className="italic tracking-wide font-medium">Igniting a Revolution in HR Innovation</h2>
+        <div className='flex flex-col gap-1.5 w-fit midscreen:items-center md:absolute md:right-10 md:top-0 md:p-2'>
+          <h2 className="italic tracking-wide font-medium md:text-xl md:tracking-wider">Igniting a Revolution in HR Innovation</h2>
           <figure className='self-end h-0.5 -mt-1.5 rounded-full w-24'>
             <img src={Curve} alt="chain" 
               className='w-full object-cover'
@@ -91,53 +91,53 @@ export default function Main() {
 
         <BsStars className='text-xs'/>
 
-        <div className="w-full text-4xl flex flex-col items-center">
+        <div className="w-full text-4xl md:text-5xl lg:text-6xl flex flex-col gap-6 items-center md:items-start">
 
-          <div className="relative font-bold">
-            <img src={Bulb} alt="" className='absolute right-11 -top-2 w-4'/>
-            <h3 className='text-center md:text-5xl'>getlinkedTech</h3>
+          <div className="relative font-bold flex flex-col items-center md:items-start">
+            <h3 className='relative w-fit text-center md:text-start '>getlinkedTech
+              <img src={Bulb} alt="" className='absolute right-6 md:right-8 -top-2 w-4 md:-top-5 md:w-6'/> 
+            </h3>
             <div className="flex text-center items-center">
               <h3>Hackathon</h3>
               <h3 className="text-[#D434FE]">1.0</h3>
               <img src={Chain} alt="chain" 
-                className='w-7 object-cover'
+                className='w-7 md:w-12 object-cover'
               />
-              <img src={Spark} alt="chain" 
-                className='w-6 object-cover'
+              <img src={Spark} alt="spark" 
+                className='w-6 md:w-10 object-cover'
               />
             </div>
           </div>
 
-        </div>
+          <div className="monstera midscreen:text-center text-[13px] whitespace-pre-wrap md:w-[80%] w-[55%] leading-5">
+            Participate in getLinked tech Hackathon 2023 stand a chance to win a Big prize
+          </div>
 
-        <div className="monstera text-[13px]">
-          <p>Participate in getLinked tech Hackathon</p>
-          <p>2023 stand a chance to win a Big prize</p>
-        </div>
+          <Link to={'/register'} className='bg-gradient-to-r to-indigo-500 from-pink-500 rounded-sm text-xs p-3 px-10 hover:opacity-90 transition-all'>
+            Register
+          </Link>
 
-        <Link to={'/register'} className='bg-gradient-to-r to-indigo-500 from-pink-500 rounded-sm text-xs p-3 px-10 hover:opacity-90 transition-all'>
-          Register
-        </Link>
+          <div className="barlow flex items-center text-[40px] md:text-5xl gap-7 md:gap-9 w-40 md:pt-6">
+            <p className="relative flex items-center">
+              <span>{hour.padStart(2, '0')}</span>
+              <span className="absolute -right-2 bottom-0.5 text-xs">H</span>
+            </p>
+            <p className="relative flex items-center">
+              <span>{minutes.padStart(2, '0')}</span>
+              <span className="absolute -right-2 bottom-0.5 text-xs">M</span>
+            </p>
+            <p className="relative flex items-center">
+              <span>{seconds.padStart(2, '0')}</span>
+              <span className="absolute -right-2 bottom-0.5 text-xs">S</span>
+            </p>
+          </div>
 
-        <div className="barlow flex items-center text-4xl gap-7 w-40">
-          <p className="relative flex items-center">
-            <span>{hour.padStart(2, '0')}</span>
-            <span className="absolute -right-2 bottom-0.5 text-xs">H</span>
-          </p>
-          <p className="relative flex items-center">
-            <span>{minutes.padStart(2, '0')}</span>
-            <span className="absolute -right-2 bottom-0.5 text-xs">M</span>
-          </p>
-          <p className="relative flex items-center">
-            <span>{seconds.padStart(2, '0')}</span>
-            <span className="absolute -right-2 bottom-0.5 text-xs">S</span>
-          </p>
         </div>
 
       </div>
 
-      <figure className='relative w-screen md:w-[90%] md:pt-5'>
-        <img src={Hackathonguy} alt="" loading='eager' className='w-full opacity-90 filter drop-shadow-xl'/>
+      <figure className='relative w-screen md:w-[88%] lg:w-[85%] md:pt-5 rounded-b-lg'>
+        <img src={Hackathonguy} alt="" loading='eager' className='w-full opacity-90 filter drop-shadow-xl rounded-b-lg'/>
         {
           <img src={Globe} alt="HackathonGuy" loading='eager' className={`absolute top-1 w-full ${dynamicOpacity} transition-all h-[97%] drop-shadow-xl`}/>
         }

@@ -43,7 +43,7 @@ export default function PartnersAndSponsors() {
           <p className='w-1/3 md:w-full h-0.5 bg-[#be22e6]' />
        </div>
 
-        <div className='flex items-center justify-between w-full h-1/2 px-12'>
+        <div className='flex items-center justify-between w-full h-1/2 pl-10 pr-4'>
           <Logos image={WisperLogo} option='b' />
           <p className='w-0.5 h-7 md:h-8 bg-[#ce2af7]' />
           <Logos image={Paybox} option='c' />
@@ -68,7 +68,7 @@ type CardProps = {
 const Logos = ({ image, option }: CardProps) => {
 
   return (
-    <figure className={`${option === 'a' ? 'md:ml-3 md:mr-4 w-10 px-0.5' : option === 'b' ? 'w-10 md:ml-6' : option === 'c' ? 'w-8' : option === 'd' ? 'md:mr-' : 'w-9'}`}>
+    <figure className={`${option === 'a' ? 'md:ml-3 md:mr-4 w-10 px-0.5' : option === 'b' ? 'w-10 md:ml-6' : option === 'c' ? 'w-5' : option === 'd' ? '-translate-x-4' : 'w-9'}`}>
       <img src={image} alt={image} loading='eager' className='objec-cover w-full h-full' />
     </figure>
   )

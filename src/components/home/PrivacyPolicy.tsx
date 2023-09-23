@@ -4,8 +4,10 @@ import StarGray from '/images/starGray.png'
 import StarWhite from '/images/starWhite.png'
 import BigLock from '/images/bgLock.png'
 import PersonLock from '/images/personLock.png'
+import useObserver from '../../hooks/useObserver'
 
 export default function PrivacyPolicy() {
+  const { isIntersecting, observerRef } = useObserver({ screenPosition: '0px', threshold: 0.2 })
 
   return (
     <section
@@ -77,12 +79,15 @@ export default function PrivacyPolicy() {
       <img src={StarGray} alt="star" loading='lazy' className='absolute -left-8 bottom-48 rotate-12 object-cover w-4 self-center' />
       </div>
 
-      <figure className='relative w-80 lg:64 md:w-60 md:flex-none'>
+      <figure 
+        ref={observerRef}
+        className={`relative w-80 lg:64 md:w-60 md:flex-none ${isIntersecting === 'SWITCH' ? '' : ''} transition-all`}>
         
         <img src={BigLock} alt="big lock" loading='eager' className='object-cover w-full self-center' />
         
-        <figure className='w-80 md:w-72 md:flex-none'>
-          <img src={PersonLock} alt="big lock" loading='eager' className='absolute top-20 object-cover w-full self-center' />
+        <figure className={`absolute top-24 w-80 md:w-72 md:flex-none`}>
+          <img src={PersonLock} alt="big lock" loading='eager' className='object-cover w-full self-center' 
+          />
         </figure>
 
         <img src={Star} alt="star" className='absolute bottom-52 -left-14 object-cover w-4' loading='lazy' />

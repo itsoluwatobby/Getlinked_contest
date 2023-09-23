@@ -9,7 +9,7 @@ export default function Introduction() {
   return (
     <section
       ref={observerRef as React.LegacyRef<HTMLParagraphElement>}
-      className='relative flex flex-col md:flex-row md:px-16 px-10 p-4 pb-12 items-center gap-6 border border-t-0 border-r-0 border-l-0 border-b-1 border-gray-700'
+      className='relative flex flex-col md:flex-row md:px-16 px-8 p-4 pb-12 items-center gap-6 border border-t-0 border-r-0 border-l-0 border-b-1 border-gray-700'
     >
       <figure 
         className='relative w-80 md:w-72 md:flex-none self-center'>
@@ -36,7 +36,7 @@ export default function Introduction() {
         </div>
 
         <div className='flex flex-col px-10 mobile:px-4'>
-          <p className='px-4 mobile:px-3 md:px-0 whitespace-pre-wrap text-justify text-sm leading-loose indent-5 md:indent-0'>
+          <p className='px-4 mobile:px-1 md:px-0 whitespace-pre-wrap text-justify text-sm leading-loose indent-5 md:indent-0'>
             Our tech hackathon is a melting pot of visionaries, and its purpose is as clear as day: to shape the future. Whether you're a coding genius, a design maverick, or a 
             concept wizard, you'll have the chance to 
             transform your ideas into reality. 
