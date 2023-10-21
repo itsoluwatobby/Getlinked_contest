@@ -6,7 +6,7 @@
 @tailwind utilities;
 @tailwind components;
 
-html{
+.hidebars{
   scroll-behavior: smooth;
 }
 
