@@ -11,7 +11,7 @@ const App = () => {
   const { setOpenModal } = useGetLinkedContext() as GetLinkedContextType
 
   return (
-    <main className='hidebars w-screen text-white h-screen overflow-y-scroll bg-gradient-to-l from-[#0e0527] from-10% to-[#150E28] flex flex-col'>
+    <main className='hidebars max-w-[1440px] mx-auto w-screen text-white h-screen overflow-y-scroll bg-gradient-to-l from-[#0e0527] from-10% to-[#150E28] flex flex-col'>
       <Navbar />
       <Modal />
       <Routes>
